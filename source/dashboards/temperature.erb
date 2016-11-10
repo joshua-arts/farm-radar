@@ -1,0 +1,77 @@
+<% content_for :title do %>FarmRadar Temperature<% end %>
+
+<div class="gridster">
+    <ul>
+    	
+        <li class="clickable_widget" id="" data-row="1" data-col="1" data-sizex="4" data-sizey="1">
+            <div data-id="welcome" data-view="Text" data-title="Temperature" data-text="" data-moreinfo=""></div>
+        </li>
+
+       
+          <li class="clickable_widget" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="temp-meter" data-view="Meter" data-title="Temperature" data-height="200" data-width="200" data-min="0" data-max="45" data-suffix="°C"></div>
+        </li>
+
+       
+        <li class="clickable_widget" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div id="low_temp_data" data-id="low_temp_data" data-view="Text" data-title="" data-text="" data-moreinfo="" style="background-color: #0ea1ba"></div>
+        </li>
+       
+		 <li class="clickable_widget" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div id="max_temp_data" data-id="max_temp_data" data-view="Text" data-title="" data-text="" data-moreinfo="" style="background-color: #18a74a;"></div>
+        </li>  
+
+        <li class="clickable_widget" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div id="weather_forecast" data-id="welcome" data-view="Text" data-title="" data-text="" data-moreinfo="" style="background-color: #37afa4"></div>
+        </li>       
+        
+    </ul>
+</div>
+
+<script type="text/javascript">
+    
+       $(document).ready(function(){
+        var apiKey = '99787cd4eeb299d6545e62d57d410d3e';
+        var url = 'https://api.forecast.io/forecast/';
+        var lat, long, lat2, long2;
+
+        var cookie_data = document.cookie;
+
+        var cookie_data = document.cookie.split(";");
+
+        lat2 = cookie_data[0];
+        lat = lat2.slice(4);
+
+        long2 = cookie_data[1];
+        //alert(long2);
+        long = long2.slice(6);
+
+        lat = parseFloat(lat);
+        long = parseFloat(long);
+
+       // alert(lat);
+        // alert(long);
+        
+        var minTemp, maxTemp, weatherForecast;
+
+        $.getJSON(url + apiKey + "/" + lat + "," + long + "?callback=?", function(forecast){
+          console.log(forecast);
+          
+          minTemp = Math.round((forecast.daily.data[0].temperatureMin-32)*(5/9));
+          maxTemp = Math.round((forecast.daily.data[0].temperatureMax-32)*(5/9));
+          weatherForecast= forecast.currently.summary;
+
+          $("#low_temp_data").html("Low Temperature is <br> <span class='large-font'>"+ minTemp+"°C</span>");
+
+          $("#max_temp_data").html("High Temperature is <br> <span class='large-font'>"+ maxTemp+"°C</span>");
+          $("#weather_forecast").html("Weather forecast: <br> <span class='large-font'>"+weatherForecast+"</span>");
+        });
+
+
+    });
+
+</script>
+
+
+
+

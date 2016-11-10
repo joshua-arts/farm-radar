@@ -1,0 +1,80 @@
+<% content_for :title do %>FarmRadar Settings<% end %>
+
+<div class="gridster">
+  
+  <div class="container">
+  	
+  	<h2 class="settings_subtitle">Settings</h2>
+
+  	<div class="form_area">
+  		<h3 id="location_heading">Location</h3>
+  		<input type="text" placeholder="# Street Address, City, Province/State, Country" class="input_field" id="address_input">
+  		<br>
+  		<br>
+  		<h3 id="location_heading">Farm Name</h3>
+  		<input type="text" placeholder="" class="input_field" id="farm_name_field">
+  		<br>
+  		<br>
+  		<br>
+  		<a href="" class="save_btn">Save Changes</a>
+
+  	</div>
+  	
+  </div>
+
+</div>
+<script type="text/javascript">
+	// API_KEY for google geocoding API AIzaSyDFn3P8ZioyEpBCi6_d8uPKPNen3IbSbDE
+	
+	$(document).ready(function(){
+		var long, lat, address, farmName;
+
+		$(".save_btn").click(function(){
+		
+			$.ajax({
+					type: "GET",
+					dataType: "xml",
+					url: "https://maps.googleapis.com/maps/api/geocode/xml?address="+encodeURIComponent($("#address_input").val()) +"&key=AIzaSyBvLtxBziRPam19dTS_0AsSbIzJZgAqR44",
+					success: parseXML,
+					error: error
+				});
+
+			function parseXML(data){
+				lat = $(data).find("location").find("lat").first().text();
+				long = $(data).find("location").find("lng").first().text();
+				address = $("#address_input").val();
+				farmName = $("#farm_name_field").val();
+
+				if (lat){
+					document.cookie = "lat="+lat;
+				}
+				if (long){
+					document.cookie = "long="+long;
+				}
+				if (address){
+					document.cookie = "address="+address;
+				}
+				if (farmName){
+					document.cookie = "farmName="+farmName;
+				}
+
+				//alert(address);
+				//alert(long);
+				//alert(lat);
+				//alert(document.cookie);
+
+				Redirect();
+			}	
+			
+			
+
+			function Redirect(){
+				window.location = "http://localhost:3030/sample";
+			}
+
+			function error(){
+				alert('API Call Error');
+			}
+		});
+	});
+</script>

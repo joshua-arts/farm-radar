@@ -1,0 +1,46 @@
+
+<% content_for :title do %>FarmRadar Status<% end %>
+<div class="gridster">
+    <ul>
+       
+       
+        <li data-row="1" data-col="1" data-sizex="4" data-sizey="1">
+            <div id="main-header-widget" data-id="welcome" data-view="Text" data-title="Bruxbury Farm: Status" data-text="Healthy" data-moreinfo="healthy farms lead to healthy lives!" style="background-color: #18a74a;"></div>
+        </li>
+       <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
+            <div data-id="temp_score" data-view="Meter" data-title="Temperature Score" data-height="200" data-width="200" data-min="0" data-max="45" data-suffix="°C" data-moreinfo="quality of temperature"></div>
+        </li>
+        
+        <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="moisture_score" data-view="Meter" data-title="Moisture Score" data-height="200" data-width="200" data-min="0" data-max="100" data-suffix="%" style="background-color:orange" data-moreinfo="amount of moisture"></div>
+        </li>
+        
+        <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="humidity_score" data-view="Meter" data-title="Humidity Score" data-height="200" data-width="200" data-min="0" data-max="100" data-suffix="%" style="background-color:#0b90ad;" data-moreinfo="quality of humidity"></div>
+        </li>
+        
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var cookie_data = document.cookie;
+        var address, farmName;
+        var address2, farmName2;
+
+        var cookie_data = document.cookie.split(";");
+
+        address2 = cookie_data[2];
+        address = address2.slice(9);
+        //alert(address);
+
+        farmName2 = cookie_data[3];
+        farmName = farmName2.slice(10);
+       // alert(farmName);
+
+        $("#main-header-widget").attr("data-title", farmName + ': Status');
+
+
+
+    });
+</script>

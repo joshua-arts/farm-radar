@@ -1,0 +1,85 @@
+
+<% content_for :title do %>FarmRadar<% end %>
+
+<div class="gridster">
+    <ul>
+        <li class="clickable_widget" id="clickable_widget1" data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+            <div id="main-widget" data-id="welcome" data-view="Text" data-title="Bruxbury Farm" data-text="" data-moreinfo=''></div>
+        </li>
+
+       <li class="clickable_widget" id="clickable_widget2" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="convergence" data-view="Clock" data-title="Time" style="background-color:#0ea1ba;"></div>
+        </li>
+       
+        <li class="clickable_widget" id="clickable_widget3" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="welcome" data-view="Text" data-title="Status" data-text="Healthy" data-moreinfo="" style="background-color: #18a74a;"></div>
+        </li>
+
+                     
+        <li class="clickable_widget" id="clickable_widget4" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="temp-meter" data-view="Meter" data-title="Temperature" data-height="200" data-width="200" data-min="0" data-max="45" data-suffix="°C"></div>
+        </li>
+
+        <li class="clickable_widget" id="clickable_widget5" data-row="1" data-col="1" data-sizex="3" data-sizey="1">
+            <div data-id="temp-trend" data-view="Graph" data-title="Temperature Trend" data-suffix="°C" style="background-color:#ff9618"></div>
+        </li>
+
+        
+        <li class="clickable_widget" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="fire" data-view="Text" data-title="Fire Hazard" data-text="NO HAZARDS." data-moreinfo="" style="background-color:red;"></div>
+        </li>
+
+        <li class="" id="" data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+            <div data-id="humidity-trend" data-view="Graph" data-title="Humidity Trend" style="background-color:#0ea1ba"></div>
+        </li>    
+
+        <li class="" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="humidity-meter" data-view="Meter" data-title="Humidity" data-height="200" data-width="200" data-min="0" data-max="45" style="background-color: #e74f27"></div>
+        </li>
+        
+        <li class="" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="moisture" data-view="Text" data-title="Moisture Level" data-text="HIGH." data-moreinfo="" style="background-color:#18a74a;"></div>
+        </li> 
+
+        <li class="" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="motion" data-view="Text" data-title="Motion" data-text="NO MOTION." data-moreinfo="" style="background-color:gray;"></div>
+        </li> 
+
+        <li class="" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="bright" data-view="Text" data-title="Brightness" data-text="MODERATE." data-moreinfo="" style="background-color:orange;"></div>
+        </li>
+        <li class="" id="" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="water" data-view="Text" data-title="Water Level" data-text="NORMAL." data-moreinfo="" style="background-color:#0ea1ba;"></div>
+        </li>
+
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var cookie_data = document.cookie;
+        var address, farmName;
+        var address2, farmName2;
+
+        var cookie_data = document.cookie.split(";");
+
+        address2 = cookie_data[2];
+        address = address2.slice(9);
+        //alert(address);
+
+        farmName2 = cookie_data[3];
+        farmName = farmName2.slice(10);
+       // alert(farmName);
+
+        $("#main-widget").attr("data-title", farmName);
+        $("#main-widget").attr("data-text", address);
+
+
+
+    });
+</script>
+
+
+
+
+
